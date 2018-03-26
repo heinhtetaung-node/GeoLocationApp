@@ -27,3 +27,11 @@ Make APP key in google
     </application>
 
 4. 
+
+
+
+The installation is
+1. npm install
+2. Go to android studio open andorid folder and build
+3. Open your emulator in android studio and run
+4. react-native run-android

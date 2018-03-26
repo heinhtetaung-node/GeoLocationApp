@@ -18,7 +18,7 @@ Make APP key in google
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
-    Add this to your application
+    Add this to your application, if you have no key register in this. https://developers.google.com/maps/documentation/android-api/signup
     <application>
     <meta-data 
       android:name="com.google.android.geo.API_KEY" 

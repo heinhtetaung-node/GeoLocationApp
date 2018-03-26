@@ -1,4 +1,3 @@
-https://www.youtube.com/watch?v=RjW1hMOA9M0
 https://github.com/react-community/react-native-maps
 https://www.youtube.com/watch?v=6ZnfsJ6mM5c
 https://www.youtube.com/watch?v=RjW1hMOA9M0
@@ -26,7 +25,10 @@ Make APP key in google
       />
     </application>
 
-4. 
+4. ----- Fix error in running on phone -----
+(in project directory) mkdir android/app/src/main/assets
+react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
+react-native run-android
 
 
 

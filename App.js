@@ -9,7 +9,8 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Dimensions
 } from 'react-native';
 
 import MapView from 'react-native-maps'
@@ -20,6 +21,15 @@ const instructions = Platform.select({
   android: 'I got it now. Double tap R on your keyboard to reload,\n' +
     'Shake or press menu button for dev menu',
 });
+
+/********* Code for get current_user_location_GPS **************/
+const {width, height} = Dimensions.get('window')
+const SCREEN_HEIGHT = height
+const SCREEN_WIDTH = width
+const ASPECT_RATIO = width / height
+const LATITUDE_DELTA = 0.0922
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO
+/**************************************************************/
 
 export default class App extends Component {
   constructor(props){
@@ -37,6 +47,37 @@ export default class App extends Component {
       }
     }
   }
+
+  /********* Code for get current_user_location_GPS **************/
+  componentDidMount(){
+    navigator.geolocation.getCurrentPosition((position) =>{
+      var lat = parseFloat(position.coords.latitude)
+      var long = parseFloat(position.coords.longitude)
+      alert(JSON.stringify(position));
+      var initialRegion = {
+        latitude : lat,
+        longitude : long,
+        latitudeDelta : LATITUDE_DELTA,
+        longitudeDelta : LONGITUDE_DELTA
+      }
+      this.setState({initialPosition:initialRegion})
+      this.setState({markerPosition:initialRegion})
+    })
+
+    this.watchID = navigator.geolocation.watchPosition((position) => {
+      // Create the object to update this.state.mapRegion through the onRegionChange function
+      let region = {
+        latitude:       position.coords.latitude,
+        longitude:      position.coords.longitude,
+        latitudeDelta:  LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA
+      }
+      this.setState({initialPosition:region})
+      this.setState({markerPosition:region})
+    });
+  }
+  /**************************************************************/
+  
   render() {
     return (
       // <View style={styles.container}>
@@ -52,6 +93,12 @@ export default class App extends Component {
       // </View>
       <View style={styles.container}>
         <MapView style={styles.map} initialRegion={this.state.initialPosition}>
+          <MapView.Marker
+           coordinate={this.state.markerPosition}
+           title="Current User GPS"
+          />
+          
+          
           <MapView.Marker
            coordinate={{
             latitude : 16.785067,

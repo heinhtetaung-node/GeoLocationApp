@@ -1,1 +1,1 @@
-# GeoLocationApp
+# ReactNativeGeoLocation

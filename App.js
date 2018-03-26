@@ -64,6 +64,7 @@ export default class App extends Component {
       this.setState({markerPosition:initialRegion})
     })
 
+    // this is the indicator moving while moving
     this.watchID = navigator.geolocation.watchPosition((position) => {
       // Create the object to update this.state.mapRegion through the onRegionChange function
       let region = {
